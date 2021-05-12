@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const dotenv = require("dotenv");
 const req = require("request");
 
-const urlCollections = require("./utils/var");
+const { searchURL, command } = require("./utils/var");
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ client.on("ready", () => {
 });
 
 const makeURL = (query) => {
-  return `${urlCollections.searchURL}${process.env.KEY}&q=${query}`;
+  return `${searchURL}${process.env.KEY}&q=${query}`;
 };
 
 const dateParser = (str) => {
@@ -36,14 +36,15 @@ const makeEmbed = (obj) => {
 };
 
 client.on("message", (msg) => {
+  const qValue = msg.content.split(command)[1];
+
   const getVideo = (query) => {
     req({ url: makeURL(query) }, (_err, res) => {
-      const resBody = JSON.parse(res.body);
-      msg.channel.send(makeEmbed(resBody));
+      msg.channel.send(makeEmbed(JSON.parse(res.body)));
     });
   };
 
-  msg.content == "search Youtube" && getVideo("Waseda Boys ke Indonesia");
+  msg.content.includes(command) && getVideo(qValue);
 });
 
 client.login(process.env.TOKEN);
