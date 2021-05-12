@@ -1,0 +1,21 @@
+{
+  "name": "youtube-search-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app",
+    "start": "node src/app"
+  },
+  "keywords": [],
+  "author": "Dimas Andhika",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
